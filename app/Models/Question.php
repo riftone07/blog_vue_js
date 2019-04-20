@@ -8,6 +8,12 @@ use App\User;
 
 class Question extends Model
 {
+    public function getRouteKeyName()
+    {
+       return 'slug';
+    }
+
+    protected $fillable = ['title',  'slug', 'body',  'category_id',  'user_id'];
 
     public function user()
     {
@@ -26,5 +32,9 @@ class Question extends Model
     	return $this->hasMany(Reply::class);
     }
 
+    public function getPathAttribute()
+    {
+        return asset("api/questions/$this->slug");
+    }
 
 }
