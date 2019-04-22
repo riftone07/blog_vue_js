@@ -55,7 +55,11 @@ class QuestionController extends Controller
      */
     public function update(Request $request, Question $question)
     {
-        //
+        
+        $input = $request->all();
+        $input['slug'] = str_slug( $input['title']);
+        $question->update($input);
+         return response('modifie',202);
     }
 
     /**
